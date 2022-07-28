@@ -4,9 +4,9 @@ Language: Flutter
 
 ## Introduction
 
-It is a demo e-commerce mobile app consisting following screens:
+It is a demo e-commerce mobile app consisting following screens and components:
 
-- Onboarding
+- Splash / Onboarding
 - Login
 - Forgot Password
 - Sign Up
@@ -14,6 +14,6 @@ It is a demo e-commerce mobile app consisting following screens:
 - OTP Verification
 - Home Page
 - Product Details
-- Order
+- Cart & Order
 - Profile
 - Bottom Navigation Bar

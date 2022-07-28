@@ -1,5 +1,8 @@
-import 'package:ecommerce/routes.dart';
+import 'routes.dart';
 import 'package:flutter/material.dart';
+
+import 'splash/splash.dart';
+import 'theme.dart';
 
 void main() {
   runApp(const App());
@@ -13,11 +16,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      routes: appRoutes,
+      theme: theme,
+      routes: routes,
+      initialRoute: SplashScreen.routeName,
     );
   }
 }
