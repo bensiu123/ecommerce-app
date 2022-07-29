@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
-import '../shared/default_button.dart';
-import '../size_config.dart';
+import '../../constants.dart';
+import '../../shared/default_button.dart';
+import '../../size_config.dart';
 import 'data.dart';
 import 'splash_context.dart';
 
@@ -13,8 +13,6 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
-
     return const Scaffold(body: Body());
   }
 }
@@ -69,7 +67,7 @@ class _BodyState extends State<Body> {
                     const Spacer(flex: 2),
                     DefaultButton(
                       label: 'Continue',
-                      onPressed: () {},
+                      onPressed: () {}, // todo: implement
                     ),
                     const Spacer(),
                   ],

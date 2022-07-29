@@ -1,7 +1,8 @@
 import 'routes.dart';
 import 'package:flutter/material.dart';
 
-import 'splash/splash.dart';
+import 'screens/splash/splash.dart';
+import 'size_config.dart';
 import 'theme.dart';
 
 void main() {
@@ -14,8 +15,10 @@ class App extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'E-Commerce Flutter Demo',
       theme: theme,
       routes: routes,
       initialRoute: SplashScreen.routeName,
