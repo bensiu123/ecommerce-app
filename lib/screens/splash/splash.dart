@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../constants.dart';
 import '../../shared/default_button.dart';
 import '../../size_config.dart';
+import '../sign_in/sign_in.dart';
 import 'data.dart';
 import 'splash_context.dart';
 
@@ -29,6 +30,8 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
     return SafeArea(
       child: SizedBox(
         width: double.infinity,
@@ -67,7 +70,9 @@ class _BodyState extends State<Body> {
                     const Spacer(flex: 2),
                     DefaultButton(
                       label: 'Continue',
-                      onPressed: () {}, // todo: implement
+                      onPressed: () {
+                        Navigator.pushNamed(context, SignInScreen.routeName);
+                      },
                     ),
                     const Spacer(),
                   ],
