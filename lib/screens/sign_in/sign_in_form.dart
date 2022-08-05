@@ -5,6 +5,7 @@ import '../../shared/default_button.dart';
 import '../../shared/form_error.dart';
 import '../../shared/input_suffix_icon.dart';
 import '../../size_config.dart';
+import '../forgot_password/forgot_password.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({Key? key}) : super(key: key);
@@ -59,9 +60,14 @@ class _SignInFormState extends State<SignInForm> {
               ),
               const Text('Remember me'),
               const Spacer(),
-              const Text(
-                'Forgot Password',
-                style: TextStyle(decoration: TextDecoration.underline),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, ForgotPasswordScreen.routeName);
+                },
+                child: const Text(
+                  'Forgot Password',
+                  style: TextStyle(decoration: TextDecoration.underline),
+                ),
               ),
             ],
           ),

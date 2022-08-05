@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
-import '../../constants.dart';
+import '../../shared/no_account_text.dart';
 import '../../shared/social_button.dart';
 import '../../size_config.dart';
 import 'sign_in_form.dart';
@@ -36,7 +35,7 @@ class Body extends StatelessWidget {
           child: SingleChildScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: SizedBox(
-              height: SizeConfig.screenHeight * .8,
+              height: SizeConfig.screenHeight * 0.8,
               child: Column(
                 children: [
                   const Spacer(),
@@ -77,23 +76,7 @@ class Body extends StatelessWidget {
                     ],
                   ),
                   const Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Don\'t have an account?',
-                        style: TextStyle(
-                            fontSize: getProportionateScreenWidth(16)),
-                      ),
-                      Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          fontSize: getProportionateScreenWidth(16),
-                          color: kPrimaryColor,
-                        ),
-                      )
-                    ],
-                  ),
+                  const NoAccountText(),
                   const Spacer(),
                 ],
               ),
