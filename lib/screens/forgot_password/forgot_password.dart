@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
-import '../../shared/default_button.dart';
-import '../../shared/form_error.dart';
-import '../../shared/input_suffix_icon.dart';
 import '../../shared/no_account_text.dart';
 import '../../size_config.dart';
+import 'forgot_password_form.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   static String routeName = '/forgot_password';
@@ -60,91 +57,6 @@ class Body extends StatelessWidget {
               ),
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class ForgotPasswordForm extends StatefulWidget {
-  const ForgotPasswordForm({Key? key}) : super(key: key);
-
-  @override
-  State<ForgotPasswordForm> createState() => _ForgotPasswordFormState();
-}
-
-class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
-  final _formKey = GlobalKey<FormState>();
-  String? email;
-  final List<String> errors = [];
-
-  void _addError(bool condition, String error) {
-    if (condition && !errors.contains(error)) {
-      setState(() {
-        errors.add(error);
-      });
-    }
-  }
-
-  void _removeError(bool condition, String error) {
-    if (condition && errors.contains(error)) {
-      setState(() {
-        errors.remove(error);
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          buildEmailFormField(),
-          SizedBox(height: getProportionateScreenHeight(30)),
-          FormError(errors: errors),
-          SizedBox(height: SizeConfig.screenHeight * 0.1),
-          DefaultButton(
-            label: 'Continue',
-            onPressed: () {
-              if (_formKey.currentState?.validate() ?? false) {
-                _formKey.currentState?.save();
-              }
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  TextFormField buildEmailFormField() {
-    return TextFormField(
-      keyboardType: TextInputType.emailAddress,
-      onSaved: (value) => email = value,
-      onChanged: (value) {
-        _removeError(value.isNotEmpty, kEmailNullError);
-        _removeError(
-          emailValidatorRegExp.hasMatch(value),
-          kInvalidEmailError,
-        );
-      },
-      validator: (value) {
-        if (value == null) {
-          _addError(true, kEmailNullError);
-          return null;
-        }
-        _addError(value.isEmpty, kEmailNullError);
-        _addError(
-          !emailValidatorRegExp.hasMatch(value),
-          kInvalidEmailError,
-        );
-        return null;
-      },
-      decoration: const InputDecoration(
-        labelText: 'Email',
-        hintText: 'Enter your email',
-        suffixIcon: InputSuffixIcon(
-          svgIcon: 'assets/icons/Mail.svg',
         ),
       ),
     );

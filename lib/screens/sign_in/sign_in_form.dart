@@ -6,6 +6,7 @@ import '../../shared/form_error.dart';
 import '../../shared/input_suffix_icon.dart';
 import '../../size_config.dart';
 import '../forgot_password/forgot_password.dart';
+import '../sign_in_success/sign_in_success.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({Key? key}) : super(key: key);
@@ -21,16 +22,17 @@ class _SignInFormState extends State<SignInForm> {
   final List<String> errors = [];
   bool rememberMe = false;
 
-  void _addError(bool condition, String error) {
-    if (condition && !errors.contains(error)) {
+  String _addError(String error) {
+    if (!errors.contains(error)) {
       setState(() {
         errors.add(error);
       });
     }
+    return error;
   }
 
-  void _removeError(bool condition, String error) {
-    if (condition && errors.contains(error)) {
+  void _removeError(String error) {
+    if (errors.contains(error)) {
       setState(() {
         errors.remove(error);
       });
@@ -78,6 +80,7 @@ class _SignInFormState extends State<SignInForm> {
             onPressed: () {
               if (_formKey.currentState?.validate() ?? false) {
                 _formKey.currentState?.save();
+                Navigator.pushNamed(context, SignInSuccessScreen.routeName);
               }
             },
           )
@@ -91,22 +94,23 @@ class _SignInFormState extends State<SignInForm> {
       keyboardType: TextInputType.emailAddress,
       onSaved: (value) => email = value,
       onChanged: (value) {
-        _removeError(value.isNotEmpty, kEmailNullError);
-        _removeError(
-          emailValidatorRegExp.hasMatch(value),
-          kInvalidEmailError,
-        );
+        if (value.isNotEmpty) _removeError(kEmailNullError);
+        if (emailValidatorRegExp.hasMatch(value)) {
+          _removeError(kInvalidEmailError);
+        }
       },
       validator: (value) {
         if (value == null) {
-          _addError(true, kEmailNullError);
-          return null;
+          return _addError(kEmailNullError);
         }
-        _addError(value.isEmpty, kEmailNullError);
-        _addError(
-          !emailValidatorRegExp.hasMatch(value),
-          kInvalidEmailError,
-        );
+        if (value.isEmpty) {
+          return _addError(kEmailNullError);
+        }
+        if (!emailValidatorRegExp.hasMatch(value)) {
+          return _addError(kInvalidEmailError);
+        }
+
+        // return null if no error
         return null;
       },
       decoration: const InputDecoration(
@@ -124,16 +128,18 @@ class _SignInFormState extends State<SignInForm> {
       keyboardType: TextInputType.visiblePassword,
       onSaved: (value) => password = value,
       onChanged: (value) {
-        _removeError(value.isNotEmpty, kPasswordNullError);
-        _removeError(value.length >= 8, kShortPasswordError);
+        if (value.isNotEmpty) _removeError(kPasswordNullError);
+        if (value.length >= 8) {
+          _removeError(kShortPasswordError);
+        }
       },
       validator: (value) {
-        if (value == null) {
-          _addError(true, kPasswordNullError);
-          return null;
+        if (value == null || value.isEmpty) {
+          return _addError(kPasswordNullError);
         }
-        _addError(value.isEmpty, kPasswordNullError);
-        _addError(value.length < 8, kShortPasswordError);
+        if (value.length < 8) {
+          return _addError(kShortPasswordError);
+        }
         return null;
       },
       obscureText: true,
