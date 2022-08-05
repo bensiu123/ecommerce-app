@@ -1,8 +1,7 @@
-import 'routes.dart';
 import 'package:flutter/material.dart';
 
+import 'routes.dart';
 import 'screens/sign_in/sign_in.dart';
-import 'screens/splash/splash.dart';
 import 'theme.dart';
 
 void main() {
